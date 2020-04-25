@@ -1,29 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>My Todo</title>
+		<title>Bubbling and Capturing</title>
 		<link
 			rel="stylesheet"
 			href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
 		/>
 		<style>
-			body {
-				text-align: center;
-				margin: 20px auto;
-				width: 300px;
+			div {
+				min-width: 100px;
+				min-height: 100px;
+				padding: 20px;
+				border: 1px solid black;
+				margin: 20px;
 			}
 		</style>
 	</head>
 	<body>
-		<h1>My Todo</h1>
-
-		<form action="submit">
-			<input type="text" required />
-		</form>
-
-		<h3>Pending</h3>
-		<ul></ul>
-		<button class="primary">Clear All</button>
+		<h1>Event Bubbling and Capturing aka Trickling</h1>
+		<div id="grandparent">
+			<div id="parent">
+				<div id="child"></div>
+			</div>
+		</div>
 		<script src="./index.js"></script>
 	</body>
 </html>
