@@ -1,34 +1,26 @@
-const form = document.querySelector('form');
-const ul = document.querySelector('ul');
-const input = document.querySelector('input');
-const button = document.querySelector('button');
-
-let items = localStorage.getItem('items')
-	? JSON.parse(localStorage.getItem('items'))
-	: [];
-const data = JSON.parse(localStorage.getItem('items'));
-
-// localStorage.setItem('items', JSON.stringify(items));
-
-const liMaker = text => {
-	const li = document.createElement('li');
-	li.textContent = text;
-	ul.appendChild(li);
+const name = {
+	firstname: 'Meghna',
+	lastname: 'Varma'
 };
-if (data) {
-	data.map(item => liMaker(item));
-}
 
-form.addEventListener('submit', e => {
-	e.preventDefault();
-	items.push(input.value);
-	localStorage.setItem('items', JSON.stringify(items));
-	liMaker(input.value);
-	input.value = '';
-});
+const printName = function(city, country) {
+	console.log(
+		`Hey I am ${this.firstname} ${this.lastname} from ${city}, ${country}`
+	);
+};
 
-button.addEventListener('click', () => {
-	localStorage.clear();
-	items = [];
-	while (ul.firstChild) ul.removeChild(ul.firstChild);
-});
+// Passes reference to this keyword and returns a copy of the function where the this keyword points to the object passed.
+myprint = printName.bind(name, 'Lucknow');
+myprint('India');
+
+// Function.prototype adds mybind function to __proto__ and som makes mybind() available for all the functions.
+Function.prototype.mybind = function(...args) {
+	const that = this;
+	const args1 = args.slice(1);
+	return function(...args2) {
+		that.apply(args[0], [...args1, ...args2]);
+	};
+};
+
+myprint2 = printName.mybind(name, 'Lucknow');
+myprint2('India');
