@@ -1,29 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>My Todo</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<title>Ghibli App</title>
+
 		<link
+			href="https://fonts.googleapis.com/css?family=Dosis:400,700"
 			rel="stylesheet"
-			href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
 		/>
-		<style>
-			body {
-				text-align: center;
-				margin: 20px auto;
-				width: 300px;
-			}
-		</style>
+		<link href="style.css" rel="stylesheet" />
 	</head>
+
 	<body>
-		<h1>My Todo</h1>
-
-		<form action="submit">
-			<input type="text" required />
-		</form>
-
-		<h3>Pending</h3>
-		<ul></ul>
-		<button class="primary">Clear All</button>
+		<div id="root"></div>
 		<script src="./index.js"></script>
 	</body>
 </html>

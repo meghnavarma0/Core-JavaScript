@@ -1,34 +1,37 @@
-const form = document.querySelector('form');
-const ul = document.querySelector('ul');
-const input = document.querySelector('input');
-const button = document.querySelector('button');
+const app = document.getElementById('root');
+const logo = document.createElement('img');
+logo.src =
+	'https://github.com/taniarascia/sandbox/blob/master/ghibli/logo.png?raw=true';
 
-let items = localStorage.getItem('items')
-	? JSON.parse(localStorage.getItem('items'))
-	: [];
-const data = JSON.parse(localStorage.getItem('items'));
+const container = document.createElement('div');
+container.setAttribute('class', 'container');
+app.appendChild(logo);
+app.appendChild(container);
+fetch('https://ghibliapi.herokuapp.com/films')
+	.then(response => {
+		return response.json();
+	})
+	.then(data => {
+		// Work with JSON data here
 
-// localStorage.setItem('items', JSON.stringify(items));
+		data.forEach(movie => {
+			const card = document.createElement('div');
+			card.setAttribute('class', 'card');
 
-const liMaker = text => {
-	const li = document.createElement('li');
-	li.textContent = text;
-	ul.appendChild(li);
-};
-if (data) {
-	data.map(item => liMaker(item));
-}
+			const h1 = document.createElement('h1');
+			h1.textContent = movie.title;
 
-form.addEventListener('submit', e => {
-	e.preventDefault();
-	items.push(input.value);
-	localStorage.setItem('items', JSON.stringify(items));
-	liMaker(input.value);
-	input.value = '';
-});
+			const p = document.createElement('p');
+			movie.description = `${movie.description.substring(0, 300)}...`;
+			p.textContent = movie.description;
 
-button.addEventListener('click', () => {
-	localStorage.clear();
-	items = [];
-	while (ul.firstChild) ul.removeChild(ul.firstChild);
-});
+			card.appendChild(h1);
+			card.appendChild(p);
+
+			container.appendChild(card);
+		});
+	})
+	.catch(err => {
+		// Do something for an error here
+		console.log('error', err);
+	});
