@@ -1,34 +1,25 @@
-const form = document.querySelector('form');
-const ul = document.querySelector('ul');
-const input = document.querySelector('input');
-const button = document.querySelector('button');
+// When a function remembers it's lexical scope even when it is executed out of its lexical scope, closure persists.
 
-let items = localStorage.getItem('items')
-	? JSON.parse(localStorage.getItem('items'))
-	: [];
-const data = JSON.parse(localStorage.getItem('items'));
-
-// localStorage.setItem('items', JSON.stringify(items));
-
-const liMaker = text => {
-	const li = document.createElement('li');
-	li.textContent = text;
-	ul.appendChild(li);
+const outerFunction = (...args) => {
+	let counter = 0;
+	return () => {
+		console.log(args[0]);
+		console.log(counter++);
+	};
 };
-if (data) {
-	data.map(item => liMaker(item));
-}
 
-form.addEventListener('submit', e => {
-	e.preventDefault();
-	items.push(input.value);
-	localStorage.setItem('items', JSON.stringify(items));
-	liMaker(input.value);
-	input.value = '';
-});
+const innerFunction = outerFunction('Incrementing counter');
+innerFunction();
+innerFunction();
+innerFunction();
+innerFunction();
 
-button.addEventListener('click', () => {
-	localStorage.clear();
-	items = [];
-	while (ul.firstChild) ul.removeChild(ul.firstChild);
-});
+// Output:
+// Incrementing counter
+// 0
+// Incrementing counter
+// 1
+// Incrementing counter
+// 2
+// Incrementing counter
+// 3
