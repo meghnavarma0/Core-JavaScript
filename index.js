@@ -1,34 +1,22 @@
-const form = document.querySelector('form');
-const ul = document.querySelector('ul');
-const input = document.querySelector('input');
-const button = document.querySelector('button');
+// The outer functions parameters and variables define inner function's lexical scope.
 
-let items = localStorage.getItem('items')
-	? JSON.parse(localStorage.getItem('items'))
-	: [];
-const data = JSON.parse(localStorage.getItem('items'));
-
-// localStorage.setItem('items', JSON.stringify(items));
-
-const liMaker = text => {
-	const li = document.createElement('li');
-	li.textContent = text;
-	ul.appendChild(li);
+const outerFunction = (...args) => {
+	let text = 'Lexical Scope';
+	const innerFunction = () => {
+		console.log(text);
+		for (let i = 0; i < args.length; i++) {
+			console.log(args[i]);
+		}
+	};
+	innerFunction();
 };
-if (data) {
-	data.map(item => liMaker(item));
-}
+outerFunction(1, 2, 5, 6);
 
-form.addEventListener('submit', e => {
-	e.preventDefault();
-	items.push(input.value);
-	localStorage.setItem('items', JSON.stringify(items));
-	liMaker(input.value);
-	input.value = '';
-});
+// output:
+// Lexical Scope
+// 1
+// 2
+// 5
+// 6
 
-button.addEventListener('click', () => {
-	localStorage.clear();
-	items = [];
-	while (ul.firstChild) ul.removeChild(ul.firstChild);
-});
+// The inner function has access to the outer functions parameters and variables. This is called as lexical scoping.
