@@ -1,34 +1,21 @@
-const form = document.querySelector('form');
-const ul = document.querySelector('ul');
-const input = document.querySelector('input');
-const button = document.querySelector('button');
+//Debouncing is a programming practice used to ensure that time-consuming tasks do not fire so often, that it stalls the performance of the web page. In other words, it limits the rate at which a function gets invoked. "executed once every 3 seconds!!"
+let counter = 0;
 
-let items = localStorage.getItem('items')
-	? JSON.parse(localStorage.getItem('items'))
-	: [];
-const data = JSON.parse(localStorage.getItem('items'));
-
-// localStorage.setItem('items', JSON.stringify(items));
-
-const liMaker = text => {
-	const li = document.createElement('li');
-	li.textContent = text;
-	ul.appendChild(li);
+const fetching = () => {
+	// Making some api calls
+	console.log('Fetching Data', counter++);
 };
-if (data) {
-	data.map(item => liMaker(item));
-}
-
-form.addEventListener('submit', e => {
-	e.preventDefault();
-	items.push(input.value);
-	localStorage.setItem('items', JSON.stringify(items));
-	liMaker(input.value);
-	input.value = '';
-});
-
-button.addEventListener('click', () => {
-	localStorage.clear();
-	items = [];
-	while (ul.firstChild) ul.removeChild(ul.firstChild);
-});
+const delaying = (fn, d) => {
+	let timer;
+	return function() {
+		let context = this,
+			args = arguments;
+		// Does not fetch at smaller intervals than 300ms.
+		clearTimeout(timer);
+		timer = setTimeout(() => {
+			fn.apply(context, args);
+		}, d);
+	};
+};
+// fetch data only when there is a pause of ateleast 3s between two key strokes
+const delayFetch = delaying(fetching, 3000);
