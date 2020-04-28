@@ -1,25 +1,32 @@
-// When a function remembers it's lexical scope even when it is executed out of its lexical scope, closure persists.
+let counter = 0;
 
-const outerFunction = (...args) => {
-	let counter = 0;
-	return () => {
-		console.log(args[0]);
-		console.log(counter++);
+// This function gets invoked too many times and is expensive.
+const expensive = function(greeting) {
+	console.log(
+		greeting,
+
+		'Expensive call invoke count',
+		counter++
+	);
+};
+// This function limits the invocation of expensive function using throttling ie. the function expensive can only be invoked after a limited period of time.
+const throttled = (fun, limit) => {
+	let flag = true;
+
+	return function() {
+		let context = this,
+			args = arguments;
+
+		if (flag) {
+			fun.apply(context, args);
+			flag = false;
+			setTimeout(() => {
+				flag = true;
+			}, limit);
+		}
 	};
 };
 
-const innerFunction = outerFunction('Incrementing counter');
-innerFunction();
-innerFunction();
-innerFunction();
-innerFunction();
+const lessExpensive = throttled(expensive, 300);
 
-// Output:
-// Incrementing counter
-// 0
-// Incrementing counter
-// 1
-// Incrementing counter
-// 2
-// Incrementing counter
-// 3
+window.addEventListener('resize', () => lessExpensive('Welcome'));
