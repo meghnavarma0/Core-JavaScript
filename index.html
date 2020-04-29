@@ -1,29 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>My Todo</title>
-		<link
-			rel="stylesheet"
-			href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-		/>
-		<style>
-			body {
-				text-align: center;
-				margin: 20px auto;
-				width: 300px;
-			}
-		</style>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<title>Function Currying</title>
 	</head>
 	<body>
-		<h1>My Todo</h1>
+		<h1>Function Currying</h1>
+		<form><span>Enter No.</span><input type="number" required /></form>
+		<br /><br />
+		<span>Multiply By 2 Using .bind() : </span>
+		<span id="bind"></span>
 
-		<form action="submit">
-			<input type="text" required />
-		</form>
-
-		<h3>Pending</h3>
-		<ul></ul>
-		<button class="primary">Clear All</button>
+		<br /><br />
+		<span>Multiply By 3 Using closures : </span>
+		<span id="closure"></span>
 		<script src="./index.js"></script>
 	</body>
 </html>

@@ -1,34 +1,31 @@
-const form = document.querySelector('form');
-const ul = document.querySelector('ul');
 const input = document.querySelector('input');
-const button = document.querySelector('button');
+const form = document.querySelector('form');
+const bind = document.querySelector('#bind');
+const closure = document.querySelector('#closure');
+// Function currying is a process of simplyfing the function by passsing arguments for some parameters beforehand so that the function looks simplified.
 
-let items = localStorage.getItem('items')
-	? JSON.parse(localStorage.getItem('items'))
-	: [];
-const data = JSON.parse(localStorage.getItem('items'));
+// This can be achieved by :
+// 1. .bind() method.
+// 2. using closure.
 
-// localStorage.setItem('items', JSON.stringify(items));
-
-const liMaker = text => {
-	const li = document.createElement('li');
-	li.textContent = text;
-	ul.appendChild(li);
-};
-if (data) {
-	data.map(item => liMaker(item));
+// 1. Using .bind():
+function multiply(x, y) {
+	return x * y;
 }
+function mul(x) {
+	return function(y) {
+		return x * y;
+	};
+}
+
+const multiplyByTwo = multiply.bind(this, 2);
+
+const multiplyByThree = mul(3);
 
 form.addEventListener('submit', e => {
 	e.preventDefault();
-	items.push(input.value);
-	localStorage.setItem('items', JSON.stringify(items));
-	liMaker(input.value);
+	const val = input.value;
+	bind.textContent = multiplyByTwo(val);
+	closure.textContent = multiplyByThree(val);
 	input.value = '';
-});
-
-button.addEventListener('click', () => {
-	localStorage.clear();
-	items = [];
-	while (ul.firstChild) ul.removeChild(ul.firstChild);
 });
