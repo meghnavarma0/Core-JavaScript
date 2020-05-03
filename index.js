@@ -1,30 +1,41 @@
-const grandparent = document.getElementById('grandparent');
-const parent = document.getElementById('parent');
-const child = document.getElementById('child');
+// Creating elements for respective ids
+const dad = document.querySelector('#dad');
+const mum = document.querySelector('#mum');
+const bro = document.querySelector('#bro');
+const meg = document.querySelector('#meg');
 
 // According to W3C standatds, event capturing occurs followed by event bubbling.
 // Capturing : Trickling: Top - Down Propagation
 // Bubbling : Bottom - Up Propagation
 
-grandparent.addEventListener(
+dad.addEventListener(
 	'click',
+
 	e => {
-		console.log('Grand Parent Clicked');
-		e.stopPropagation(); // Prevents further propagation of the event
+		console.log('Shaking hands with her dad.');
+		e.stopPropagation();
 	},
 	true // Capturing
 );
-parent.addEventListener(
+mum.addEventListener(
 	'click',
 	() => {
-		console.log('Parent Clicked');
+		console.log('Shaking hands with her mum.');
 	},
 	false // Bubbling
 );
-child.addEventListener(
+bro.addEventListener(
 	'click',
 	() => {
-		console.log('Child Clicked');
+		console.log('Shaking hands with her brother.');
+	},
+	true // Capturing
+);
+
+meg.addEventListener(
+	'click',
+	() => {
+		console.log('Shaking hands with Meghna!');
 	},
 	false // Bubbling
 );
