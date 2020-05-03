@@ -1,34 +1,13 @@
-const form = document.querySelector('form');
-const ul = document.querySelector('ul');
-const input = document.querySelector('input');
-const button = document.querySelector('button');
+// let x = function(a) {
+// 	return function(b) {
+// 		if (b) {
+// 			return x(a + b);
+// 		} else {
+// 			return a;
+// 		}
+// 	};
+// };
 
-let items = localStorage.getItem('items')
-	? JSON.parse(localStorage.getItem('items'))
-	: [];
-const data = JSON.parse(localStorage.getItem('items'));
+let x = a => b => (b ? x(a + b) : a);
 
-// localStorage.setItem('items', JSON.stringify(items));
-
-const liMaker = text => {
-	const li = document.createElement('li');
-	li.textContent = text;
-	ul.appendChild(li);
-};
-if (data) {
-	data.map(item => liMaker(item));
-}
-
-form.addEventListener('submit', e => {
-	e.preventDefault();
-	items.push(input.value);
-	localStorage.setItem('items', JSON.stringify(items));
-	liMaker(input.value);
-	input.value = '';
-});
-
-button.addEventListener('click', () => {
-	localStorage.clear();
-	items = [];
-	while (ul.firstChild) ul.removeChild(ul.firstChild);
-});
+console.log(x(1)(2)(3)(4)());
