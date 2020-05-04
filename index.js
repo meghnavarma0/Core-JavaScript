@@ -41,4 +41,4 @@ console.log(JSuser);
 
 // When you do not know the name of the key, then you fetch it via a for in loop, then, the typeof key is string, so we have to use object[key]
 
-// In short, when a key is of type string, you fetch values via object[key]
+// In short, when a key is of type string, you fetch values via object[key] else using object.key
