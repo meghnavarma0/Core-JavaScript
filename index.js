@@ -1,13 +1,16 @@
-// Polyfill for Array.prototype.map() function
-let arr = [6, 9, 3, 7, 12];
+// Polyfill for Array.prototype.filter()
 
-Array.prototype.myMap = function(callback) {
+let arr = [1, 4, 5, 9, 3, 6, 8, 10];
+
+Array.prototype.myFilter = function(callback) {
 	let newArray = [];
 	let arr = this;
-	for (let i = 0; i < arr.length; i++) {
-		newArray.push(callback(arr[i]));
-	}
+	arr.forEach(element => {
+		if (callback(element)) {
+			newArray.push(element);
+		}
+	});
 	return newArray;
 };
 
-console.log(arr.map(x => 2 * x));
+console.log(arr.myFilter(x => x % 2 == 0));
