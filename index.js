@@ -1,6 +1,6 @@
 // Polyfill for Array.prototype.filter()
 
-// the filter method returns a new array which consists of the elements that satisfy the condition thrown by the callback function over the given array.
+// the filter method returns a new array which consists of the elements that satisfy the condition thrown by the callback function over each element the given array.
 
 // This method does not mutate the original array.
 
