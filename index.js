@@ -1,25 +1,21 @@
-// Polyfill for Array.prototype.filter()
+// Program to find the number of 1s in binary representation of a number.
 
-// the filter method returns a new array which consists of the elements that satisfy the condition thrown by the callback function over each element the given array.
-
-// This method does not mutate the original array.
-
-let arr = [1, 4, 5, 9, 3, 6, 8, 10];
-
-// The function below returns a filtered array of only the even numbers.
-
-Array.prototype.myFilter = function(callback) {
-	let newArray = [];
-	let passedArray = this;
-	passedArray.forEach(element => {
-		if (callback(element)) {
-			newArray.push(element);
+const noOfOnes = num => {
+	let count = 0;
+	while (num) {
+		if (num & 1) {
+			count += 1;
 		}
-	});
-	return newArray;
+		num = num >> 1;
+	}
+	return count;
 };
+console.log(noOfOnes(2)); // 1
+console.log(noOfOnes(3)); // 2
+console.log(noOfOnes(7)); // 3
+console.log(noOfOnes(8)); // 1
 
-console.log(arr.myFilter(x => x % 2 == 0));
-
-// Output
-// [4, 6, 8, 10]
+// 2 -> 10
+// 3 -> 11
+// 7 -> 111
+// 8 -> 1000
