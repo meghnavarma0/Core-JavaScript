@@ -24,8 +24,8 @@ function knapsack(val, weight, n, w) {
 
 	return mem[n][w];
 }
-val = [4, 6, 3, 9, 2];
-weight = [2, 12, 10, 5, 6];
-n = val.length;
-w = 15;
+let val = [4, 6, 3, 9, 2];
+let weight = [2, 12, 10, 5, 6];
+let n = val.length;
+let w = 15;
 console.log(knapsack(val, weight, n, w));
